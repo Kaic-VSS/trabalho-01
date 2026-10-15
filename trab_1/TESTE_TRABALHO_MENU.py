@@ -1,0 +1,23 @@
+from TESTE_TRABALHO_MENUS12 import menu_ativos, menu_vulnerabilidades
+
+def main():
+    while True:
+        print("\n======== SISTEMA DE GESTÃO DE ATIVOS E VULNERABILIDADES ========")
+        print("1 - Gerenciar Ativos")
+        print("2 - Gerenciar Vulnerabilidades")
+        print("3 - Sair")
+            
+        opcao = input("Escolha uma opção: ").strip()
+            
+        if opcao == "1":
+            menu_ativos()
+        elif opcao == "2":
+            menu_vulnerabilidades()
+        elif opcao == "3":
+            print("Saindo do sistema... Até logo!")
+            break
+        else:
+            print("Opção inválida! Escolha entre 1 e 3.")
+
+if __name__ == "__main__":
+    main()

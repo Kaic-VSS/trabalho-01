@@ -17,7 +17,7 @@ def main():
             print("Saindo do sistema... Até logo!")
             break
         else:
-            print("❌ Opção inválida! Escolha entre 1 e 3.")
+            print("Opção inválida! Escolha entre 1 e 3.")
 
 if __name__ == "__main__":
     main()

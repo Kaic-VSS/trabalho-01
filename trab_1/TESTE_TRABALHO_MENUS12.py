@@ -1,4 +1,4 @@
-from TESTE_TRABALHO_FUNCAO_ATV import cadastro_At, consulta_At, atualizar_At, remover_At
+from TESTE_TRABALHO_FUNCAO_ATV import cadastro_At, consulta_At, atualizar_At, remover_At, gerenciar_responsaveis_setores
 from TESTE_TRABALHO_FUNCAO_VUL import cadastrar_catalogo_vul, consulta_Vul, atualizar_Vul, remover_Vul, associar_vul_ativo, desassociar_vul_ativo
 
 def menu_ativos():
@@ -8,7 +8,8 @@ def menu_ativos():
         print("2 - Consultar Ativo")
         print("3 - Atualizar Ativo")
         print("4 - Remover Ativo")
-        print("5 - Voltar ao Menu Principal")
+        print("5 - Gerenciar Responsáveis e Setores (Adicionar/Remover)")
+        print("6 - Voltar ao Menu Principal")
         
         op = input("Escolha uma opção: ").strip()
         
@@ -16,8 +17,9 @@ def menu_ativos():
         elif op == "2": consulta_At()
         elif op == "3": atualizar_At()
         elif op == "4": remover_At()
-        elif op == "5": break
-        else: print("❌ Opção inválida!")
+        elif op == "5": gerenciar_responsaveis_setores()
+        elif op == "6": break
+        else: print("Opção inválida!")
 
 def menu_vulnerabilidades():
     while True:
@@ -39,4 +41,4 @@ def menu_vulnerabilidades():
         elif op == "5": atualizar_Vul()
         elif op == "6": remover_Vul()
         elif op == "7": break
-        else: print("❌ Opção inválida!")
+        else: print("Opção inválida!")

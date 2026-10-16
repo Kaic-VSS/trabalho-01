@@ -14,7 +14,7 @@ def cadastrar_catalogo_vul():
         print(f"- {sev.value}")
     severidade = input("Digite a severidade: ").strip().lower()
     if severidade not in [s.value for s in SeveridadeVulnerabilidade]:
-        print("❌ Erro: Severidade inválida.")
+        print("Erro: Severidade inválida.")
         return
 
 
@@ -23,11 +23,11 @@ def cadastrar_catalogo_vul():
         print(f"- {st.value}")
     status = input("Digite o status: ").strip().lower()
     if status not in [s.value for s in StatusVulnerabilidade]:
-        print("❌ Erro: Status inválido.")
+        print("Erro: Status inválido.")
         return
 
     if not nome or not desc:
-        print("❌ Erro: Campos obrigatórios em branco.")
+        print("Erro: Campos obrigatórios em branco.")
         return
 
     try:
@@ -38,7 +38,7 @@ def cadastrar_catalogo_vul():
 
 
     if any(v["Nome_Vulnerabilidade"] == nome for v in lista_vuls):
-        print("⚠️ Esta vulnerabilidade já está cadastrada no catálogo global.")
+        print("Esta vulnerabilidade já está cadastrada no catálogo global.")
         return
 
     nova_vul = {
@@ -46,7 +46,7 @@ def cadastrar_catalogo_vul():
         "Descricao": desc,
         "Severidade": severidade,
         "Status": status,
-        "IDs_Ativos_Afetados": []  # Começa sem ativos vinculados
+        "IDs_Ativos_Afetados": []
     }
 
     lista_vuls.append(nova_vul)
@@ -54,13 +54,12 @@ def cadastrar_catalogo_vul():
     with open(ARQUIVO_VULS, "w", encoding="utf-8") as f:
         json.dump(lista_vuls, f, ensure_ascii=False, indent=4)
 
-    print(f"✅ Vulnerabilidade '{nome}' adicionada ao catálogo global com sucesso!")
+    print(f"Vulnerabilidade '{nome}' adicionada ao catálogo global com sucesso!")
 
 
 def associar_vul_ativo():
     print("\n=== ASSOCIAR VULNERABILIDADE A UM ATIVO ===")
     
-    # 1. Carrega Catálogo de Vulnerabilidades
     try:
         with open(ARQUIVO_VULS, "r", encoding="utf-8") as f:
             lista_vuls = json.load(f)
@@ -68,7 +67,7 @@ def associar_vul_ativo():
         lista_vuls = []
 
     if not lista_vuls:
-        print("⚠️ O catálogo global de vulnerabilidades está vazio. Cadastre uma vulnerabilidade primeiro.")
+        print("O catálogo global de vulnerabilidades está vazio. Cadastre uma vulnerabilidade primeiro.")
         return
 
     print("\nVulnerabilidades disponíveis no Catálogo:")
@@ -79,7 +78,7 @@ def associar_vul_ativo():
         escolha_vul = int(input("\nDigite o número da vulnerabilidade que deseja associar: "))
         vul_selecionada = lista_vuls[escolha_vul - 1]
     except (ValueError, IndexError):
-        print("❌ Opção inválida.")
+        print("Opção inválida.")
         return
 
 
@@ -90,7 +89,7 @@ def associar_vul_ativo():
         lista_ativos = []
 
     if not lista_ativos:
-        print("⚠️ Não há ativos cadastrados no sistema.")
+        print("Não há ativos cadastrados no sistema.")
         return
 
     print("\nAtivos disponíveis:")
@@ -99,12 +98,12 @@ def associar_vul_ativo():
 
     id_ass_str = input("\nDigite o ID do Ativo que receberá esta vulnerabilidade: ").strip()
     if not id_ass_str.isdigit():
-        print("❌ Erro: ID inválido.")
+        print("Erro: ID inválido.")
         return
     id_associado = int(id_ass_str)
 
     if not any(a["ID"] == id_associado for a in lista_ativos):
-        print("❌ Erro: ID de ativo não encontrado.")
+        print("Erro: ID de ativo não encontrado.")
         return
 
     if id_associado not in vul_selecionada["IDs_Ativos_Afetados"]:
@@ -113,9 +112,9 @@ def associar_vul_ativo():
         with open(ARQUIVO_VULS, "w", encoding="utf-8") as f:
             json.dump(lista_vuls, f, ensure_ascii=False, indent=4)
             
-        print(f"✅ Vulnerabilidade '{vul_selecionada['Nome_Vulnerabilidade']}' associada com sucesso ao ativo ID {id_associado}!")
+        print(f"Vulnerabilidade '{vul_selecionada['Nome_Vulnerabilidade']}' associada com sucesso ao ativo ID {id_associado}!")
     else:
-        print("⚠️ Este ativo já possui esta vulnerabilidade associada.")
+        print("Este ativo já possui esta vulnerabilidade associada.")
 
 
 def desassociar_vul_ativo():
@@ -129,14 +128,14 @@ def desassociar_vul_ativo():
         return
 
     if not lista_vuls:
-        print("⚠️ O catálogo global está vazio.")
+        print("O catálogo global está vazio.")
         return
 
 
     vuls_com_ativos = [v for v in lista_vuls if v.get("IDs_Ativos_Afetados")]
     
     if not vuls_com_ativos:
-        print("⚠️ Não há vulnerabilidades associadas a nenhum ativo no momento.")
+        print("Não há vulnerabilidades associadas a nenhum ativo no momento.")
         return
 
     print("\nVulnerabilidades atualmente associadas a ativos:")
@@ -147,7 +146,7 @@ def desassociar_vul_ativo():
         escolha = int(input("\nDigite o número da vulnerabilidade que deseja desassociar de um ativo: "))
         vul_escolhida = vuls_com_ativos[escolha - 1]
     except (ValueError, IndexError):
-        print("❌ Opção inválida.")
+        print("Opção inválida.")
         return
 
     ids_afetados = vul_escolhida["IDs_Ativos_Afetados"]
@@ -166,7 +165,7 @@ def desassociar_vul_ativo():
 
     id_remover_str = input("\nDigite o ID do Ativo que teve a vulnerabilidade corrigida/removida: ").strip()
     if not id_remover_str.isdigit():
-        print("❌ Erro: ID inválido.")
+        print("Erro: ID inválido.")
         return
     id_remover = int(id_remover_str)
 
@@ -176,16 +175,16 @@ def desassociar_vul_ativo():
         with open(ARQUIVO_VULS, "w", encoding="utf-8") as f:
             json.dump(lista_vuls, f, ensure_ascii=False, indent=4)
             
-        print(f"✅ Vulnerabilidade '{vul_escolhida['Nome_Vulnerabilidade']}' removida com sucesso do ativo ID {id_remover} (Corrigida)!")
+        print(f"Vulnerabilidade '{vul_escolhida['Nome_Vulnerabilidade']}' removida com sucesso do ativo ID {id_remover} (Corrigida)!")
     else:
-        print("⚠️ Este ativo não possui esta vulnerabilidade associada.")
+        print("Este ativo não possui esta vulnerabilidade associada.")
 
 
 def consulta_Vul():
     print("\n==== CONSULTA DE VULNERABILIDADE ====")
     termo = input("Digite o nome da vulnerabilidade para buscar: ").strip().lower()
     if not termo:
-        print("❌ Erro: Termo de busca vazio.")
+        print("Erro: Termo de busca vazio.")
         return
 
     try:
@@ -213,7 +212,7 @@ def consulta_Vul():
             print(f"Status: {v['Status'].upper()}")
             
             ids_afetados = v.get("IDs_Ativos_Afetados", [])
-            print("💻 Ativos Afetados:")
+            print("Ativos Afetados:")
             ativos_af = [a for a in lista_ativos if a["ID"] in ids_afetados]
             if ativos_af:
                 for a in ativos_af:
@@ -238,7 +237,7 @@ def atualizar_Vul():
 
     vul = next((v for v in lista_vuls if v["Nome_Vulnerabilidade"] == nome_busca), None)
     if not vul:
-        print("❌ Vulnerabilidade não encontrada.")
+        print("Vulnerabilidade não encontrada.")
         return
 
     print(f"\nAtualizando: {vul['Nome_Vulnerabilidade']} | Status Atual: {vul['Status']} | Risco Atual: {vul['Severidade']}")
@@ -253,7 +252,7 @@ def atualizar_Vul():
 
     with open(ARQUIVO_VULS, "w", encoding="utf-8") as f:
         json.dump(lista_vuls, f, ensure_ascii=False, indent=4)
-    print("✅ Vulnerabilidade atualizada com sucesso!")
+    print("Vulnerabilidade atualizada com sucesso!")
 
 
 def remover_Vul():
@@ -269,7 +268,7 @@ def remover_Vul():
 
     vul = next((v for v in lista_vuls if v["Nome_Vulnerabilidade"] == nome_vul), None)
     if not vul:
-        print("❌ Vulnerabilidade não encontrada.")
+        print("Vulnerabilidade não encontrada.")
         return
 
     certeza = input("Tem certeza da remoção do catálogo? (S/N): ").strip().lower()
@@ -277,6 +276,6 @@ def remover_Vul():
         lista_vuls.remove(vul)
         with open(ARQUIVO_VULS, "w", encoding="utf-8") as f:
             json.dump(lista_vuls, f, ensure_ascii=False, indent=4)
-        print("✅ Vulnerabilidade removida do catálogo com sucesso!")
+        print("Vulnerabilidade removida do catálogo com sucesso!")
     else:
         print("Operação cancelada.")

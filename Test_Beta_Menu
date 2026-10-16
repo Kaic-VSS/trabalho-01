@@ -1,4 +1,4 @@
-from TESTE_TRABALHO_MENUS12 import menu_ativos, menu_vulnerabilidades
+from Test_Beta_SubMenus import menu_ativos, menu_vulnerabilidades
 
 def main():
     while True:

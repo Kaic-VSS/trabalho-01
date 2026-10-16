@@ -1,4 +1,4 @@
-from Funcao_ID import StatusVulnerabilidade, SeveridadeVulnerabilidade
+from Test_Beta_Id import StatusVulnerabilidade, SeveridadeVulnerabilidade
 import json
 
 ARQUIVO_DADOS = "dados.json"

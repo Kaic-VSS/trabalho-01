@@ -1,5 +1,5 @@
-from TESTE_TRABALHO_FUNCAO_ATV import cadastro_At, consulta_At, atualizar_At, remover_At
-from TESTE_TRABALHO_FUNCAO_VUL import cadastrar_catalogo_vul, consulta_Vul, atualizar_Vul, remover_Vul, associar_vul_ativo, desassociar_vul_ativo
+from Test_Beta_Ativo import cadastro_At, consulta_At, atualizar_At, remover_At
+from Test_Beta_Vul import cadastrar_catalogo_vul, consulta_Vul, atualizar_Vul, remover_Vul, associar_vul_ativo, desassociar_vul_ativo
 
 def menu_ativos():
     while True:

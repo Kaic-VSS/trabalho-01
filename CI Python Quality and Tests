@@ -1,9 +1,9 @@
 # Define que o robô vai agir sempre que você fizer um push ou abrir um Pull Request na branch main
 on:
   push:
-    branches: [ main ]
+    branches: [ Trab_Final ]
   pull_request:
-    branches: [ main ]
+    branches: [ Trab_Final ]
 
 jobs:
   build:
